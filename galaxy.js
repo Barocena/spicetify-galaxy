@@ -30,6 +30,7 @@
   }
 
   async function fetchArtistImage(uid) {
+    if (useHomeEverywhere) return;
     const bannerSect = document.querySelector(".under-main-view");
     const observer = new MutationObserver(mutation_list => {
       for (mutation of mutation_list) {
@@ -187,7 +188,7 @@
   bgContainer.className = "bg-main-container";
   bgContainer.innerHTML = `</div><div class="bg-image-container"><img class="bg-main-image"></div><div class="bg-main-shadow">`;
   const bgImage = bgContainer.children[0].children[0];
-  useCurrSongAsHome ? fetchCurrTrackAlbumImage() : setBg(startImage);
+  (useCurrSongAsHome & !useHomeEverywhere) ? fetchCurrTrackAlbumImage() : setBg(startImage);
   document.body.prepend(bgContainer);
 
   // move user profile icon to navbar
